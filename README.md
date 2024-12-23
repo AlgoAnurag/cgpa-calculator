@@ -3,7 +3,7 @@
 A simple, interactive, and visually appealing CGPA calculator built with **HTML**, **CSS**, and **JavaScript**.  
 This project allows users to calculate their CGPA by entering subject details, grades, and credits. It features an attractive UI with dynamic functionality for adding and deleting subjects.
 
-## Features 🚀
+## Features ✨
 - **Dynamic Table**: Add, delete, and edit subjects with ease.
 - **Grade Dropdown**: Select grades from a pre-defined dropdown menu for better usability.
 - **Responsive Design**: Works seamlessly on desktops and mobile devices.
@@ -27,14 +27,6 @@ Check out the live version of the site here: [CGPA Calculator Live](https://algo
 
 ## Screenshots 📸
 ![Home Screen](gpa_calci_photo.png)
-
-## Contribution 🤝
-Contributions are always welcome! If you have ideas for improvements, feel free to:
-- Fork the repository.
-- Create a feature branch (`git checkout -b feature/YourFeature`).
-- Commit your changes (`git commit -m 'Add some feature'`).
-- Push to the branch (`git push origin feature/YourFeature`).
-- Open a Pull Request.
 
 ## Acknowledgments 💡
 - Inspired by the need for a simple yet effective CGPA calculator.
