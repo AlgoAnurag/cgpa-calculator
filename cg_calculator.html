@@ -1,0 +1,173 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>CGPA Calculator</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 0;
+            background-color: #f9f9f9;
+        }
+        h1 {
+            text-align: center;
+            margin-top: 20px;
+            color: #333;
+        }
+        .container {
+            max-width: 700px;
+            margin: 30px auto;
+            padding: 20px;
+            background: #fff;
+            box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+            border-radius: 8px;
+        }
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            margin-bottom: 20px;
+        }
+        th, td {
+            border: 1px solid #ccc;
+            padding: 10px;
+            text-align: center;
+        }
+        th {
+            background-color: #f0f0f0;
+        }
+        button {
+            padding: 10px 20px;
+            background-color: #007bff;
+            color: white;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+        }
+        button:hover {
+            background-color: #0056b3;
+        }
+        .result {
+            text-align: center;
+            font-size: 1.2em;
+            margin-top: 10px;
+        }
+    </style>
+</head>
+<body>
+    <h1>CGPA Calculator</h1>
+    <div class="container">
+        <table id="subjectsTable">
+            <thead>
+                <tr>
+                    <th>#</th>
+                    <th>Subject Name</th>
+                    <th>Grade</th>
+                    <th>Credits</th>
+                    <th>Actions</th>
+                </tr>
+            </thead>
+            <tbody>
+                <!-- Rows will be dynamically added here -->
+            </tbody>
+        </table>
+        <button onclick="addRow()">Add Subject</button>
+        <button onclick="calculateCGPA()">Calculate CGPA</button>
+        <div class="result" id="result"></div>
+    </div>
+
+    <script>
+        // Grade-to-point mapping
+        const gradePoints = {
+            "A": 10,
+            "A-": 9,
+            "B": 8,
+            "B-": 7,
+            "C": 6,
+            "E": 2,
+            "F": 0
+        };
+
+        // Function to add a new row to the table
+        function addRow() {
+            const table = document.getElementById("subjectsTable").getElementsByTagName("tbody")[0];
+            const row = table.insertRow();
+
+            // Add Serial Number
+            let cell0 = row.insertCell(0);
+            cell0.textContent = table.rows.length;
+
+            // Add Subject Name input
+            let cell1 = row.insertCell(1);
+            cell1.innerHTML = `<input type="text" placeholder="Enter subject" required>`;
+
+            // Add Grade dropdown
+            let cell2 = row.insertCell(2);
+            cell2.innerHTML = `
+                <select required>
+                    <option value="" disabled selected>Select Grade</option>
+                    <option value="A">A</option>
+                    <option value="A-">A-</option>
+                    <option value="B">B</option>
+                    <option value="B-">B-</option>
+                    <option value="C">C</option>
+                    <option value="E">E</option>
+                    <option value="F">F</option>
+                </select>
+            `;
+
+            // Add Credits input
+            let cell3 = row.insertCell(3);
+            cell3.innerHTML = `<input type="number" placeholder="Credits" min="1" required>`;
+
+            // Add Delete button
+            let cell4 = row.insertCell(4);
+            cell4.innerHTML = `<button onclick="deleteRow(this)">Delete</button>`;
+        }
+
+        // Function to delete a row and update serial numbers
+        function deleteRow(button) {
+            const table = document.getElementById("subjectsTable").getElementsByTagName("tbody")[0];
+            const row = button.parentElement.parentElement;
+            table.removeChild(row);
+            updateSerialNumbers();
+        }
+
+        // Function to update serial numbers
+        function updateSerialNumbers() {
+            const table = document.getElementById("subjectsTable").getElementsByTagName("tbody")[0];
+            const rows = table.getElementsByTagName("tr");
+            for (let i = 0; i < rows.length; i++) {
+                rows[i].cells[0].textContent = i + 1;
+            }
+        }
+
+        // Function to calculate CGPA
+        function calculateCGPA() {
+            const table = document.getElementById("subjectsTable").getElementsByTagName("tbody")[0];
+            const rows = table.getElementsByTagName("tr");
+
+            let totalPoints = 0;
+            let totalCredits = 0;
+
+            for (let row of rows) {
+                const subject = row.cells[1].getElementsByTagName("input")[0].value.trim();
+                const grade = row.cells[2].getElementsByTagName("select")[0].value.trim();
+                const credits = parseInt(row.cells[3].getElementsByTagName("input")[0].value.trim());
+
+                if (!subject || !grade || isNaN(credits)) {
+                    alert("Please fill out all fields correctly.");
+                    return;
+                }
+
+                totalPoints += gradePoints[grade] * credits;
+                totalCredits += credits;
+            }
+
+            const cgpa = totalCredits ? (totalPoints / totalCredits).toFixed(2) : 0;
+            document.getElementById("result").innerText = `Your CGPA is: ${cgpa}`;
+        }
+    </script>
+</body>
+</html>
