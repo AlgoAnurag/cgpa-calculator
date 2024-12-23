@@ -10,16 +10,9 @@ This project allows users to calculate their CGPA by entering subject details, g
 - **Automatic Calculations**: Computes CGPA instantly with a click.
 - **Attractive UI**: Modern design with gradient backgrounds and smooth hover effects.
 
-## How to Use 📖
-1. Clone this repository or download the file.
-2. Open the `index.html` file in any modern web browser.
-3. Add subject details:
-   - Subject Name
-   - Grade (Select from the dropdown: A, A-, B, etc.)
-   - Credits
-4. Click **"Add Subject"** to add more rows.
-5. Click **"Calculate CGPA"** to see the result.
-6. To remove a subject, click the **"Delete"** button next to it.
+## Live Demo 🚀
+
+Check out the live version of the site here: [CGPA Calculator Live](https://algoanurag.github.io/cgpa-calculator/)
 
 ## Grade-to-Point Mapping 🧮
 | Grade | Points |
